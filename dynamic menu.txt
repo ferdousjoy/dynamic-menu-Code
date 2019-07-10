@@ -1,0 +1,25 @@
+  <div class="collapse navbar-collapse navbar-light" id="na">
+                    <ul class="navbar-nav ml-auto mli">
+
+                        @foreach($menu as $key)
+                         <li class="nav-item dropdown">
+                            <a class="nav-link  dropdown-toggle @if (App\SubModel::where('menu_id',$key->id)->count()==0) ssd @endif " href="{{$key->link}}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$key->title}}</a>
+                            @php $sub_menu = App\SubModel::where('menu_id',$key->id)->get(); @endphp
+
+                            @if(count($sub_menu)>0)
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                               @foreach($sub_menu as $sm)
+                                <a class="dropdown-item" href="#">{{$sm->title}}</a>
+                                @endforeach
+                              </div>
+                            @endif
+                        </li>
+                        @endforeach
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+<style>
+a.ssd::after{border:none;}
+</style>
